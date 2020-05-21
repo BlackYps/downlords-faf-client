@@ -5,20 +5,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="replayVaultRoot" xmlns="http://javafx.com/javafx/8.0.111"
            fx:controller="com.faforever.client.replay.OnlineReplayVaultController">
-    <children>
+    <HBox>
+        <ScrollPane fx:id="searchScrollPane" minWidth="450" fitToWidth="true">
+            <fx:include fx:id="search" source="../search/search.fxml"/>
+        </ScrollPane>
         <ScrollPane fx:id="scrollPane" fitToWidth="true" maxHeight="1.7976931348623157E308"
                     maxWidth="1.7976931348623157E308">
             <content>
                 <VBox fx:id="contentPane" spacing="10.0">
                     <children>
-                        <fx:include fx:id="search" source="../search/search.fxml"/>
-                        <Separator maxWidth="1.7976931348623157E308"/>
                         <HBox spacing="10.0">
                             <children>
                                 <JFXButton fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked"
@@ -77,5 +77,5 @@
                 </Label>
             </children>
         </VBox>
-    </children>
+    </HBox>
 </StackPane>

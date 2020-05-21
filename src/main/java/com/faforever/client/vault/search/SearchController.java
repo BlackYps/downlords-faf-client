@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,6 +56,7 @@ public class SearchController implements Controller<Pane> {
   public ComboBox<Property> sortPropertyComboBox;
   public ComboBox<SortOrder> sortOrderChoiceBox;
   public HBox sortBox;
+  public VBox advancedSearchPane;
 
   private List<LogicalNodeController> queryNodes;
   private InvalidationListener queryInvalidationListener;
@@ -91,6 +94,7 @@ public class SearchController implements Controller<Pane> {
     queryInvalidationListener = observable -> queryTextField.setText(buildQuery(initialLogicalNodeController.specificationController, queryNodes));
     addInvalidationListener(initialLogicalNodeController);
     initSorting();
+    advancedSearchPane.setVisible(false);
   }
 
   private void initSorting() {
@@ -242,6 +246,14 @@ public class SearchController implements Controller<Pane> {
 
   public void setSearchButtonDisabledCondition(BooleanBinding inSearchableState) {
     searchButton.disableProperty().bind(queryTextField.textProperty().isEmpty().or(inSearchableState.not()));
+  }
+
+  public void onRevealAdvancedSearchButtonClicked(ActionEvent actionEvent) {
+    if (advancedSearchPane.isVisible()) {
+      advancedSearchPane.setVisible(false);
+    } else {
+      advancedSearchPane.setVisible(true);
+    }
   }
 
   @Getter

@@ -221,6 +221,14 @@
   -fx-background-color: -fx-color-select;
 }
 
+.toggle-button.normal-button{
+  -fx-background-color: #FFFFFF11;
+}
+
+.toggle-button.normal-button:selected {
+  -fx-background-color: #FFFFFF33;
+}
+
 .toggle-button, .button {
   -fx-padding: 0.5em 1em;
 }
@@ -236,7 +244,7 @@
 
 .icon-button > .text {
   -fx-font-family: 'dfc-icons';
-  -fx-padding: 4;
+  -fx-padding: 0;
   -fx-font-size: 2em;
 }
 

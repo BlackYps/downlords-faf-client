@@ -75,6 +75,7 @@ public class OnlineReplayVaultController extends AbstractViewController<Node> {
   public SearchController searchController;
   public Button moreButton;
   public VBox ownReplaysPane;
+  public ScrollPane searchScrollPane;
 
   private ReplayDetailController replayDetailController;
   private int currentPage;
@@ -96,6 +97,7 @@ public class OnlineReplayVaultController extends AbstractViewController<Node> {
   public void initialize() {
     super.initialize();
     JavaFxUtil.fixScrollSpeed(scrollPane);
+    JavaFxUtil.fixScrollSpeed(searchScrollPane);
     loadingPane.managedProperty().bind(loadingPane.visibleProperty());
     showroomGroup.managedProperty().bind(showroomGroup.visibleProperty());
     searchResultGroup.managedProperty().bind(searchResultGroup.visibleProperty());
