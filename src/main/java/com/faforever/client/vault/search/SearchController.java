@@ -10,6 +10,7 @@ import com.faforever.client.theme.UiService;
 import com.github.rutledgepaulv.qbuilders.builders.QBuilder;
 import com.github.rutledgepaulv.qbuilders.conditions.Condition;
 import com.github.rutledgepaulv.qbuilders.visitors.RSQLVisitor;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.BooleanBinding;
@@ -58,6 +59,7 @@ public class SearchController implements Controller<Pane> {
   public HBox sortBox;
   public VBox advancedSearchPane;
   public VBox basicSearchPane;
+  public JFXToggleButton revealAdvancedSearchButton;
 
   private List<LogicalNodeController> queryNodes;
   private InvalidationListener queryInvalidationListener;
@@ -81,6 +83,10 @@ public class SearchController implements Controller<Pane> {
   public void initialize() {
     queryTextField.managedProperty().bind(queryTextField.visibleProperty());
     queryTextField.visibleProperty().bind(displayQueryCheckBox.selectedProperty());
+    advancedSearchPane.managedProperty().bind(advancedSearchPane.visibleProperty());
+    advancedSearchPane.visibleProperty().bind(revealAdvancedSearchButton.selectedProperty());
+    basicSearchPane.managedProperty().bind(basicSearchPane.visibleProperty());
+    basicSearchPane.visibleProperty().bind(revealAdvancedSearchButton.selectedProperty().not());
 
     initialLogicalNodeController.logicalOperatorField.managedProperty()
         .bind(initialLogicalNodeController.logicalOperatorField.visibleProperty());
@@ -95,7 +101,6 @@ public class SearchController implements Controller<Pane> {
     queryInvalidationListener = observable -> queryTextField.setText(buildQuery(initialLogicalNodeController.specificationController, queryNodes));
     addInvalidationListener(initialLogicalNodeController);
     initSorting();
-    advancedSearchPane.setVisible(false);
   }
 
   private void initSorting() {
@@ -247,16 +252,6 @@ public class SearchController implements Controller<Pane> {
 
   public void setSearchButtonDisabledCondition(BooleanBinding inSearchableState) {
     searchButton.disableProperty().bind(queryTextField.textProperty().isEmpty().or(inSearchableState.not()));
-  }
-
-  public void onRevealAdvancedSearchButtonClicked(ActionEvent actionEvent) {
-    if (advancedSearchPane.isVisible()) {
-      advancedSearchPane.setVisible(false);
-      basicSearchPane.setVisible(true);
-    } else {
-      advancedSearchPane.setVisible(true);
-      basicSearchPane.setVisible(false);
-    }
   }
 
   @Getter
