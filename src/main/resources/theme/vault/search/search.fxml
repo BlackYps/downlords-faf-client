@@ -7,18 +7,50 @@
 
 <VBox fx:id="searchRoot" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faforever.client.vault.search.SearchController">
     <VBox spacing="20.0" styleClass="card">
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Name:" />
-            <JFXTextField fx:id="nameTextField" maxWidth="250"/>
-        </HBox>
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Author:" />
-            <JFXTextField fx:id="authorTextField" maxWidth="250"/>
-        </HBox>
-        <HBox spacing="40">
-            <JFXCheckBox fx:id="simMods" mnemonicParsing="false" selected="true" text="Sim" />
-            <JFXCheckBox fx:id="UIMods" mnemonicParsing="false" selected="true" text="UI" />
-        </HBox>
+        <ToggleButton fx:id="revealAdvancedSearchButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onRevealAdvancedSearchButtonClicked" styleClass="normal-button" text="advanced search" />
+        <VBox fx:id="basicSearchPane" spacing="20.0">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Name:" />
+                <JFXTextField fx:id="nameTextField" maxWidth="250"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Author:" />
+                <JFXTextField fx:id="authorTextField" maxWidth="250"/>
+            </HBox>
+            <HBox spacing="40">
+                <JFXCheckBox fx:id="simMods" mnemonicParsing="false" selected="true" text="Sim" />
+                <JFXCheckBox fx:id="UIMods" mnemonicParsing="false" selected="true" text="UI" />
+            </HBox>
+        </VBox>
+        <VBox fx:id="advancedSearchPane" spacing="10" visible="false">
+            <VBox fx:id="criteriaPane" maxWidth="500.0" spacing="10">
+                <children>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <children>
+                            <fx:include fx:id="initialLogicalNode" source="logical_node.fxml" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <children>
+                    <JFXButton maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddCriteriaButtonClicked" text="%query.addCriteria" />
+                    <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResetButtonClicked" text="%reset" />
+                </children>
+                <padding>
+                    <Insets left="20.0" right="20.0"/>
+                </padding>
+            </HBox>
+            <JFXCheckBox fx:id="displayQueryCheckBox" mnemonicParsing="false" text="%vault.replays.displayQuery">
+                <VBox.margin>
+                    <Insets left="20.0" right="20.0"/>
+                </VBox.margin>
+            </JFXCheckBox>
+            <JFXTextField fx:id="queryTextField" maxWidth="1.7976931348623157E308" onAction="#onSearchButtonClicked" promptText="%vault.replays.queryPrompt" />
+            <padding>
+                <Insets bottom="20.0" top="20.0" />
+            </padding>
+        </VBox>
         <HBox fx:id="sortBox" alignment="CENTER_LEFT" spacing="5">
             <children>
                 <Label text="%search.sort" />
@@ -35,36 +67,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
     </VBox>
-    <ToggleButton fx:id="revealAdvancedSearchButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onRevealAdvancedSearchButtonClicked" styleClass="normal-button" text="advanced search" />
-    <VBox fx:id="advancedSearchPane" spacing="10" styleClass="card">
-        <VBox fx:id="criteriaPane" maxWidth="500.0" spacing="10">
-            <children>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <fx:include fx:id="initialLogicalNode" source="logical_node.fxml" />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-        <HBox alignment="CENTER_LEFT" spacing="10.0">
-            <children>
-                <JFXButton maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddCriteriaButtonClicked" text="%query.addCriteria" />
-                <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResetButtonClicked" text="%reset" />
-            </children>
-            <padding>
-                <Insets left="20.0" right="20.0"/>
-            </padding>
-        </HBox>
-        <JFXCheckBox fx:id="displayQueryCheckBox" mnemonicParsing="false" text="%vault.replays.displayQuery">
-            <VBox.margin>
-                <Insets left="20.0" right="20.0"/>
-            </VBox.margin>
-        </JFXCheckBox>
-        <JFXTextField fx:id="queryTextField" maxWidth="1.7976931348623157E308" onAction="#onSearchButtonClicked" promptText="%vault.replays.queryPrompt" />
-        <padding>
-            <Insets bottom="20.0" top="20.0" />
-        </padding>
-    </VBox>
+
     <padding>
         <Insets bottom="20.0" left="20.0" top="20.0" />
     </padding>

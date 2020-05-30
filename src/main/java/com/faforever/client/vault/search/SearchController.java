@@ -57,6 +57,7 @@ public class SearchController implements Controller<Pane> {
   public ComboBox<SortOrder> sortOrderChoiceBox;
   public HBox sortBox;
   public VBox advancedSearchPane;
+  public VBox basicSearchPane;
 
   private List<LogicalNodeController> queryNodes;
   private InvalidationListener queryInvalidationListener;
@@ -251,8 +252,10 @@ public class SearchController implements Controller<Pane> {
   public void onRevealAdvancedSearchButtonClicked(ActionEvent actionEvent) {
     if (advancedSearchPane.isVisible()) {
       advancedSearchPane.setVisible(false);
+      basicSearchPane.setVisible(true);
     } else {
       advancedSearchPane.setVisible(true);
+      basicSearchPane.setVisible(false);
     }
   }
 
